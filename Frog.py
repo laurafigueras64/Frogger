@@ -1,10 +1,14 @@
 import keyboard
 from Vehicle import *
+from tkinter import *
+from PIL import Image, ImageTk
 
 class Frog:
     # tindrem la posicio (x,y), alçada(h), amplada(w), velocitat(v)
     def __init__(self,x,y,w,h):
-        self.x, self.y, self.w, self.h = x, y, w, h
+        self.x, self.y = x, y
+        self.w, self.h = 40, 33
+        self.img = PhotoImage(file = 'frog1.png')
 
     def move(self):
         if keyboard.is_pressed("right arrow"):
@@ -21,27 +25,28 @@ class Frog:
             if (self.x - 40 > 20):
                 self.x -= 30
         if keyboard.is_pressed("down arrow"):
-            if (120 < self.y < 360):
+            if (100 < self.y < 360):
                 if (self.y + 33 < 750):
                     self.y += 60
             else:
                 if (self.y + 33 < 750):
                     self.y += 30
 
-    def paint(self,window,img):
-        window.create_image(self.x,self.y,image=img,anchor='ne')
-        #window.create_rectangle(self.x,self.y,self.x+self.w,self.y+self.h,fill="green")
+    def paint(self,window):
+        window.create_image(self.x,self.y,image=self.img,anchor='ne')
     
-    def crash(self,window,car):
-        if (self.x < car.x + car.w) & (self.x + self.w > car.x) & (self.y < car.y + car.h) & (self.y + self.h > car.y):
-            window.create_oval(200,200,300,300, fill="red")
+    def crash(self,car):
+        if (car.x - car.w < self.x < car.x + self.w) and (car.y - car.h < self.y < car.y + self.h):
+            return 1
+        else: return 0
 
-    #def drown(self,drift):
+    def drown(self,drifts):
+        if (330 < self.y or self.y < 100): return 0
+        aux = 0
+        for d in drifts:
+            if ((d.x - d.w + self.w < self.x < d.x) and (d.y < self.y < d.y + d.h - self.h)):
+                aux = 1
+    
+        if (aux == 1): return 0
+        else: return 1
 
-    def ondrift(self,drift):
-        if (isinstance(drift,Log)):
-            if ((drift.x - 163 < self.x < drift.x) and (drift.y < self.y < drift.y + 5)):
-                self.x += drift.v
-        #elif (drift is Turtle):
-            #if ((drift.x - 163 < self.x < drift.x) and (drift.y < self.y < drift.y + 5)):
-            #   self.x += drift.v
