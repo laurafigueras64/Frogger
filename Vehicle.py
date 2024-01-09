@@ -108,4 +108,4 @@ class Truck (Road):
         self.img = PhotoImage(file = truck)
 
     def display(self,window):
-        window.create_image(self.x, self.y, image=self.img, anchor='ne')
+        window.create_image(self.x, self.y-3, image=self.img, anchor='ne')

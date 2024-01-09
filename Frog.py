@@ -36,7 +36,7 @@ class Frog:
         window.create_image(self.x,self.y,image=self.img,anchor='ne')
     
     def crash(self,car):
-        if (car.x - car.w < self.x < car.x + self.w) and (car.y - car.h < self.y < car.y + self.h):
+        if (car.x - car.w < self.x < car.x + self.w) and (car.y - car.h < self.y < car.y + self.h + 5):
             return 1
         else: return 0
 
