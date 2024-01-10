@@ -10,7 +10,7 @@ TK_SILENCE_DEPRECATION=1
 state = 1
 pressed = False
 game_time = 0
-wich_frog = 3
+wich_frog = 0
 
 root = Tk() # creem un objecte Tkinter
 window = Canvas(root, width=600, height=780)
@@ -36,6 +36,15 @@ button.place_forget()
 button.pack_forget()
 window.update()
 
+# frog images for the menu
+frog_small = []
+frog_big = []
+for i in range(6):
+    frog_imag = Image.open("b.frog"+str(i+1)+".png")
+    resized = frog_imag.resize((70,58))
+    frog_small.append(ImageTk.PhotoImage(resized))
+    frog_big.append(PhotoImage(file="b.frog"+str(i+1)+".png"))
+
 def frog_l():
     global wich_frog
     wich_frog = (wich_frog - 1) % 6
@@ -46,23 +55,39 @@ def frog_r():
 
 window.create_text(300,200,text="FROG")
 button.pack()
-button.place(x=300,y=580,anchor="n")
+button.place(x=300,y=580,anchor="center")
 btt_lft = Button(root,text="<-",command=frog_l)
 btt_lft.pack()
-btt_lft.place(x=100,y=390,anchor="n")
+btt_lft.place(x=50,y=390,anchor="center")
 frog_str = "frog " + str(wich_frog)
-window.create_text(300,390,text=frog_str,anchor="n")
+window.create_text(300,390,text=frog_str,anchor="center")
 btt_rght = Button(root,text="->",command=frog_r)
 btt_rght.pack()
-btt_rght.place(x=500,y=390,anchor="n")
+btt_rght.place(x=550,y=390,anchor="center")
 
 
 # pantalla tria frog
 while pressed:
-    window.delete("all")
+    window.create_text(300,200,text="FROG")
     frog_str = "frog " + str(wich_frog + 1)
-    window.create_text(300,390,text=frog_str,anchor="n")
+    window.create_text(300,390,text=frog_str,anchor="center")
+    frg_l = Label(root, image=frog_small[(wich_frog - 1) % 6])
+    frg_l.pack()
+    frg_l.place(x=150,y=390,anchor="center")
+    frg_r = Label(root, image=frog_small[(wich_frog + 1) % 6])
+    frg_r.pack()
+    frg_r.place(x=450,y=390,anchor="center")
+    frg = Label(root, image=frog_big[wich_frog])
+    frg.pack()
+    frg.place(x=300,y=390,anchor="center")
     window.update()
+    window.delete("all")
+    frg.pack_forget()
+    frg.place_forget()
+    frg_l.pack_forget()
+    frg_l.place_forget()
+    frg_r.pack_forget()
+    frg_r.place_forget()
 
 window.delete("all")
 button.place_forget()
@@ -76,7 +101,6 @@ window.update()
 # part 0: inicialitzar el joc: crear carrils, cotxes, etc.
 cars = []
 cars.append(Car(30, 670, 5))
-cars.append(Car(100, 670, 5))
 cars.append(Car(300, 670, 5))
 cars.append(Car(590, 670, 5))
 cars.append(Truck(300, 610, 3))
@@ -91,7 +115,6 @@ cars.append(Car(430, 490, -5))
 cars.append(Truck(310, 490, -5))
 cars.append(Car(20, 490, -5))
 cars.append(Car(0, 430, -3))
-cars.append(Car(100, 430, -3))
 cars.append(Car(370, 430, -3))
 cars.append(Car(500, 430, -3))
 cars.append(Car(570, 430, -3))
