@@ -5,10 +5,11 @@ from PIL import Image, ImageTk
 
 class Frog:
     # tindrem la posicio (x,y), alçada(h), amplada(w), velocitat(v)
-    def __init__(self,x,y,w,h):
+    def __init__(self,x,y,wich_frog):
         self.x, self.y = x, y
         self.w, self.h = 40, 33
-        self.img = PhotoImage(file = 'frog1.png')
+        str_img = "frog" + str(wich_frog+1) + ".png"
+        self.img = PhotoImage(file = str_img) 
 
     def move(self):
         if keyboard.is_pressed("right arrow"):
