@@ -31,7 +31,7 @@ class Log_s (River):
             return 0
 
     def drift(self,frog):
-        if (self.on_drift(frog)):
+        if (self.on_drift(frog) and (45 < frog.x < 595)):
             frog.x += self.v
     
     def display(self,window):
@@ -50,7 +50,7 @@ class Log_l (River):
             return 0
 
     def drift(self,frog):
-        if (self.on_drift(frog)):
+        if (self.on_drift(frog) and (45 < frog.x < 595)):
             frog.x += self.v
     
     def display(self,window):
@@ -72,7 +72,7 @@ class Turtle (River):
             return 0
 
     def drift(self,frog):
-        if (self.on_drift(frog)):
+        if (self.on_drift(frog) and (45 < frog.x < 595)):
             frog.x += self.v
 
     def display(self,window):

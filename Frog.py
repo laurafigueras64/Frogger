@@ -19,6 +19,10 @@ class Frog:
             if (120 < self.y < 360):
                 if (self.y > 90):
                     self.y -= 60
+                if (self.y > 90 and (self.x >= 595)):
+                    self.x -= 1
+                if (self.y > 90 and (45 >= self.x)):
+                    self.x += 1
             else:
                 if (self.y > 90):
                     self.y -= 30
@@ -29,6 +33,10 @@ class Frog:
             if (100 < self.y < 360):
                 if (self.y + 33 < 750):
                     self.y += 60
+                if (self.y > 90 and (self.x >= 595)):
+                    self.x -= 1
+                if (self.y > 90 and (45 >= self.x)):
+                    self.x += 1
             else:
                 if (self.y + 33 < 750):
                     self.y += 30

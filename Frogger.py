@@ -159,7 +159,7 @@ while True:
     # part 3: detecció de xocs o navegacions
     for c in cars:
         if (frog.crash(c)):
-            state = 0
+            #state = 0
             window.create_oval(200,200,300,300, fill="red")
         
     if (frog.drown(river)):
