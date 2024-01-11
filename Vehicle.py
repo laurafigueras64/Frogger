@@ -3,24 +3,24 @@ from tkinter import *
 from PIL import Image, ImageTk
 
 class Vehicle:
-    def __init__(self,x,y,v=1):
-        self.x, self.y, self.v = x, y, v
+    def __init__(self,x,y,diff,v=1):
+        self.x, self.y, self.v, self.diff = x, y, v, diff
 
     def move(self):
         if (self.x > 800):
             self.x = 0
         if (self.x < 0):
             self.x = 800
-        self.x += self.v
+        self.x += self.v * self.diff
 
 class River (Vehicle):
-    def __init__(self, x, y, v=1):
-        super().__init__(x, y, v)
+    def __init__(self, x, y,diff, v=1):
+        super().__init__(x, y,diff, v)
 
 
 class Log_s (River):
-    def __init__(self, x, y, v=1):
-        super().__init__(x, y, v)
+    def __init__(self, x, y,diff, v=1):
+        super().__init__(x, y,diff, v)
         self.img = PhotoImage(file = 'small_log.png')
         self.w, self.h = 146, 45
 
@@ -38,8 +38,8 @@ class Log_s (River):
         window.create_image(self.x, self.y, image=self.img, anchor='ne')
 
 class Log_l (River):
-    def __init__(self, x, y, v=1):
-        super().__init__(x, y, v)
+    def __init__(self, x, y,diff, v=1):
+        super().__init__(x, y,diff, v)
         self.img = PhotoImage(file = 'large_log.png')
         self.w, self.h = 202, 45
 
@@ -57,8 +57,8 @@ class Log_l (River):
         window.create_image(self.x, self.y, image=self.img, anchor='ne')
 
 class Turtle (River):
-    def __init__(self, x, y, v=1):
-        super().__init__(x, y, v)
+    def __init__(self, x, y,diff, v=1):
+        super().__init__(x, y,diff, v)
         if (v < 0):
             self.img = PhotoImage(file = 'turtle_left.png')
         else:
@@ -79,12 +79,12 @@ class Turtle (River):
         window.create_image(self.x, self.y, image=self.img, anchor='ne')
 
 class Road (Vehicle):
-    def __init__(self, x, y, v=1):
-        super().__init__(x, y, v)
+    def __init__(self, x, y,diff, v=1):
+        super().__init__(x, y,diff, v)
 
 class Car (Road):
-    def __init__(self, x, y, v=1):
-        super().__init__(x, y, v)
+    def __init__(self, x, y,diff, v=1):
+        super().__init__(x, y,diff, v)
         if (v < 0):
             cars = ["car1_left.png", "car2_left.png", "car3_left.png", "car4_left.png", "car5_left.png"]
         else:
@@ -97,8 +97,8 @@ class Car (Road):
         window.create_image(self.x, self.y, image=self.img, anchor='ne')
 
 class Truck (Road):
-    def __init__(self, x, y, v=1):
-        super().__init__(x, y, v)
+    def __init__(self, x, y,diff, v=1):
+        super().__init__(x, y,diff, v)
         self.w, self.h = 119, 50
         if (v < 0):
             trucks = ["truck1_left.png", "truck2_left.png"]
