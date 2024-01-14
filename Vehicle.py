@@ -4,14 +4,14 @@ from PIL import Image, ImageTk
 
 class Vehicle:
     def __init__(self,x,y,diff,v=1):
-        self.x, self.y, self.v, self.diff = x, y, v, diff
+        self.x, self.y, self.v = x, y, v*diff
 
     def move(self):
         if (self.x > 800):
             self.x = 0
         if (self.x < 0):
             self.x = 800
-        self.x += self.v * self.diff
+        self.x += self.v
 
 class River (Vehicle):
     def __init__(self, x, y,diff, v=1):

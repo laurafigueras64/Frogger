@@ -17,15 +17,18 @@ class Frog:
                 self.x += 30
         if keyboard.is_pressed("up arrow"):
             if (120 < self.y < 360):
-                if (self.y > 90):
-                    self.y -= 60
-                if (self.y > 90 and (self.x >= 595)):
+                self.y -= 60
+                if ((self.x >= 595)):
                     self.x -= 1
-                if (self.y > 90 and (45 >= self.x)):
+                if ((45 >= self.x)):
                     self.x += 1
             else:
                 if (self.y > 90):
-                    self.y -= 30
+                    if ((self.y < 200) and ((50 < self.x < 90) or (180 < self.x < 220) or (300 < self.x < 340) or (420 < self.x < 460) or (550 < self.x < 590))):
+                        self.y -= 30
+                    if (self.y > 200):
+                        self.y -= 30
+
         if keyboard.is_pressed("left arrow"):
             if (self.x - 40 > 20):
                 self.x -= 30
